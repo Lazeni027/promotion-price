@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>NOVA Startup - Catalogues complets | Cloud & Licences</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f0f4f9;
+            scroll-behavior: smooth;
+        }
+
+        /* Palette professionnelle avec couleurs promo mises en avant */
+        :root {
+            --primary-dark: #0a2540;
+            --primary: #1a4d7a;
+            --primary-light: #2c6e9e;
+            --accent-gold: #c7a03a;
+            --accent-gold-light: #e0bb5e;
+            --success: #147042;
+            --success-light: #e6f4ee;
+            --promo-bg: #ffecd6;
+            --promo-border: #e67e22;
+            --promo-text: #e67e22;
+            --promo-highlight: #d35400;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a2c3e;
+            --text-muted: #4a5b6e;
+            --card-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+            --pharmacy: #2ecc71;
+            --superette: #3498db;
+            --hardware: #e67e22;
+            --school: #9b59b6;
+        }
+
+        header {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2.2rem 1rem;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        header h1 i {
+            color: var(--accent-gold);
+        }
+
+        header p {
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        /* Onglets principaux */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 30px 16px 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 1px solid var(--gray-border);
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            color: var(--text-dark);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .tab-btn.active i {
+            color: white;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active-tab {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Grille des catalogues (cartes cliquables) */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin: 30px 0;
+        }
+
+        .catalog-card {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--gray-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .catalog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent-gold));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .catalog-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .catalog-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 28px 36px -16px rgba(10, 37, 64, 0.2);
+        }
+
+        .catalog-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Couleurs spécifiques pour chaque type de boutique */
+        .catalog-card[data-sector="superette"] .catalog-icon { color: var(--superette); }
+        .catalog-card[data-sector="pharmacie"] .catalog-icon { color: var(--pharmacy); }
+        .catalog-card[data-sector="quincaillerie"] .catalog-icon { color: var(--hardware); }
+        .catalog-card[data-sector="ecole"] .catalog-icon { color: var(--school); }
+        .catalog-card[data-sector="general"] .catalog-icon { color: var(--primary); }
+
+        .catalog-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .catalog-card p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        .badge-catalog {
+            background: var(--success-light);
+            color: var(--success);
+            padding: 5px 16px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+
+        .sector-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* MODAL style pro avec couleurs promo */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 37, 64, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 680px;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 36px;
+            overflow-y: auto;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+            animation: slideUp 0.25s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 1.3rem 1.8rem;
+            background: var(--primary-dark);
+            color: white;
+            border-top-left-radius: 36px;
+            border-top-right-radius: 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-gold);
+        }
+
+        .modal-body {
+            padding: 1.8rem;
+        }
+
+        .offre-detail {
+            background: var(--gray-bg);
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .offre-detail h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 12px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-border);
+            font-weight: 500;
+        }
+
+        .price-highlight {
+            color: var(--success);
+            font-weight: 800;
+        }
+
+        /* Style promo amélioré et bien visible */
+        .promo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--promo-bg), #ffe4bc);
+            border-left: 4px solid var(--promo-border);
+            padding: 8px 14px;
+            border-radius: 12px;
+            margin: 10px 0;
+            font-weight: bold;
+            color: var(--promo-text);
+            font-size: 0.85rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .promo-price {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #15803d;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-weight: normal;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .btn-modal-wa {
+            background: linear-gradient(95deg, #0ea95b, #11784d);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 60px;
+            margin-top: 20px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        /* pour la section licence (tableau + cartes mobiles) */
+        .desktop-table-wrapper {
+            background: white;
+            border-radius: 28px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 400px;
+        }
+        .price-table th {
+            background: var(--primary-dark);
+            color: white;
+            padding: 14px;
+            font-weight: 600;
+        }
+        .price-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--gray-border);
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .price-table tr:hover td {
+            background: #f1f6fe;
+        }
+        .licence-cards-container {
+            display: none;
+            flex-direction: column;
+            gap: 18px;
+            margin: 20px 0;
+        }
+        .licence-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: 0.1s;
+            border: 1px solid var(--gray-border);
+        }
+        .licence-card:hover {
+            border-color: var(--accent-gold);
+        }
+        @media (max-width: 780px) {
+            .desktop-table-wrapper { display: none; }
+            .licence-cards-container { display: flex; }
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: #eef2ff;
+            padding: 1.8rem;
+            text-align: center;
+            margin-top: 40px;
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-dark);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            z-index: 2100;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+        .toast-msg.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 40px 0 20px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        :root {
+            --immobilier: #8e44ad;
+        }
+
+        .catalog-card[data-sector="immobilier"] .catalog-icon { 
+            color: var(--immobilier); 
+        }
+
+        /* Bannière promo pour la nouvelle offre */
+        .new-offer-banner {
+            background: linear-gradient(135deg, #0a2540, #1a4d7a);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px 0 30px;
+            box-shadow: 0 8px 20px rgba(10, 37, 64, 0.3);
+        }
+        .new-offer-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .new-offer-banner .highlight {
+            color: var(--accent-gold);
+            font-weight: 800;
+        }
+        .new-offer-banner .sub {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1><i class="fas fa-chart-line"></i> NOVA Startup Technologie CI</h1>
+    <p>Logiciels professionnels — Catalogue complet Cloud & Licences</p>
+</header>
+
+<div class="tabs">
+    <button class="tab-btn active" data-tab="catalog"><i class="fas fa-cloud-upload-alt"></i> Catalogue Cloud</button>
+    <button class="tab-btn" data-tab="licence"><i class="fas fa-laptop-code"></i> Catalogue Licences & Forfaits</button>
+</div>
+
+<div class="container">
+    <!-- CATALOGUE CLOUD (SaaS) -->
+    <div id="catalog" class="tab-content active-tab">
+        
+        <!-- Section Solutions Générales -->
+        <div class="section-title">Solutions Générales</div>
+        <div class="section-subtitle">Des logiciels adaptés à tous types de commerces</div>
+        <div class="catalog-grid">
+            <div class="catalog-card" data-soft="caisse-simple" data-type="cloud" data-sector="general">
+                <div class="catalog-icon"><i class="fas fa-cash-register"></i></div>
+                <h3>Gestion de Caisse Simple</h3>
+                <p>Vente, Encaissements, rapports journaliers, gestion des ventes, Rapports.</p>
+                <span class="badge-catalog"><i class="fas fa-chart-line"></i> À partir de 10 000 F/mois</span>
+            </div>
+            <div class="catalog-card" data-soft="caisse-premium" data-type="cloud" data-sector="general">
+                <div class="catalog-icon"><i class="fas fa-crown"></i></div>
+                <h3>Gestion de Caisse Premium</h3>
+                <p>Multi-caisses, inventaire avancé, Gestion Avancée, statistiques poussées.</p>
+                <span class="badge-catalog"><i class="fas fa-star"></i> À partir de 15 000 F/mois</span>
+            </div>
+            <div class="catalog-card" data-soft="facturation-pro" data-type="cloud" data-sector="general">
+                <div class="catalog-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                <h3>Facturation & Archivage Pro</h3>
+                <p>Devis, factures, relances client, gestion des paiements, Visite, Archivage.</p>
+                <span class="badge-catalog"><i class="fas fa-chart-simple"></i> À partir de 10 000 F/mois</span>
+            </div>
+            <div class="catalog-card" data-soft="facturation-simple" data-type="cloud" data-sector="general">
+                <div class="catalog-icon"><i class="fas fa-receipt"></i></div>
+                <h3>Facturation Simple</h3>
+                <p>Factures basiques, édition rapide, suivi clientèle.</p>
+                <span class="badge-catalog"><i class="fas fa-gem"></i> À partir de 5 000 F/mois</span>
+            </div>
+            <div class="catalog-card" data-soft="restaurant" data-type="cloud" data-sector="general">
+                <div class="catalog-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Restaurant Complet</h3>
+                <p>Gestion des tables, commandes, cuisine, stocks et caisse.</p>
+                <span class="badge-catalog"><i class="fas fa-utensil-spoon"></i> À partir de 10 000 F/mois</span>
+            </div>
+        </div>
+
+        <!-- Section Boutiques Spécialisées -->
+        <div class="section-title">🎯 Solutions par secteur d'activité</div>
+        <div class="section-subtitle">Des logiciels adaptés à vos besoins spécifiques</div>
+        <div class="catalog-grid">
+            
+            <!-- SUPERETTE / ÉPICERIE -->
+            <div class="catalog-card" data-soft="superette" data-type="cloud" data-sector="superette">
+                <div class="catalog-icon"><i class="fas fa-store"></i></div>
+                <h3>Superette & Épicerie</h3>
+                <p>Gestion des stocks périmables, codes-barres, ventes par lot, inventaire rapide.</p>
+                <span class="badge-catalog"><i class="fas fa-boxes"></i> À partir de 12 000 F/mois</span>
+                <div class="sector-badge">🏪 Superette</div>
+            </div>
+            
+            <!-- PHARMACIE -->
+            <div class="catalog-card" data-soft="pharmacie" data-type="cloud" data-sector="pharmacie">
+                <div class="catalog-icon"><i class="fas fa-prescription-bottle"></i></div>
+                <h3>Pharmacie & Parapharmacie</h3>
+                <p>Gestion des médicaments, dates de péremption, ordonnances, suivi des lots, traçabilité.</p>
+                <span class="badge-catalog"><i class="fas fa-medkit"></i> À partir de 18 000 F/mois</span>
+                <div class="sector-badge">💊 Pharmacie</div>
+            </div>
+            
+            <!-- QUINCAILLERIE / MATÉRIAUX -->
+            <div class="catalog-card" data-soft="quincaillerie" data-type="cloud" data-sector="quincaillerie">
+                <div class="catalog-icon"><i class="fas fa-tools"></i></div>
+                <h3>Quincaillerie & Matériaux</h3>
+                <p>Gestion des stocks lourds, unités de mesure multiples, prix dégressifs, devis chantier.</p>
+                <span class="badge-catalog"><i class="fas fa-hard-hat"></i> À partir de 15 000 F/mois</span>
+                <div class="sector-badge">🔧 Quincaillerie</div>
+            </div>
+            
+            <!-- ÉCOLE / CENTRE DE FORMATION -->
+            <div class="catalog-card" data-soft="ecole" data-type="cloud" data-sector="ecole">
+                <div class="catalog-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>École & Centre de Formation</h3>
+                <p>Gestion des élèves, notes, inscriptions, paiements des frais, certificats, emplois du temps.</p>
+                <span class="badge-catalog"><i class="fas fa-book"></i> À partir de 20 000 F/mois</span>
+                <div class="sector-badge">📚 École</div>
+            </div>
+
+            <!-- LOGICIEL IMMOBILIER COMPLET -->
+            <div class="catalog-card" data-soft="logiciel-immobilier" data-type="cloud" data-sector="immobilier">
+                <div class="catalog-icon"><i class="fas fa-building"></i></div>
+                <h3>Logiciel Immobilier Complet</h3>
+                <p>Gestion locative, transactions, syndic, baux, quittances, mandats, copropriétés, suivi financier.</p>
+                <span class="badge-catalog"><i class="fas fa-chart-line"></i> À partir de 20 000 F/mois</span>
+                <div class="sector-badge">🏢 Tout-en-un Immobilier</div>
+            </div>
+            
+            <!-- BOULANGERIE / PÂTISSERIE -->
+            <div class="catalog-card" data-soft="boulangerie" data-type="cloud" data-sector="general">
+                <div class="catalog-icon"><i class="fas fa-bread-slice"></i></div>
+                <h3>Boulangerie & Pâtisserie</h3>
+                <p>Production, gestion des recettes, suivi des invendus, commandes spéciales.</p>
+                <span class="badge-catalog"><i class="fas fa-cookie-bite"></i> À partir de 12 000 F/mois</span>
+                <div class="sector-badge">🥖 Boulangerie</div>
+            </div>
+            
+            <!-- BOUTIQUE DE VÊTEMENTS -->
+            <div class="catalog-card" data-soft="mode" data-type="cloud" data-sector="general">
+                <div class="catalog-icon"><i class="fas fa-tshirt"></i></div>
+                <h3>Boutique de Mode & Accessoires</h3>
+                <p>Gestion des tailles, couleurs, collections, retours client, campagnes promo.</p>
+                <span class="badge-catalog"><i class="fas fa-tag"></i> À partir de 12 000 F/mois</span>
+                <div class="sector-badge">👕 Mode</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 10px;"><i class="fas fa-mouse-pointer"></i> Cliquez sur un logiciel pour voir tous les détails et tarifs Cloud</div>
+    </div>
+
+    <!-- CATALOGUE LICENCES & FORFAITS -->
+    <div id="licence" class="tab-content">
+        
+        <!-- Bannière Nouvelle Offre -->
+        <div class="new-offer-banner">
+            <h2>🚀 Nouvelle Offre Unique</h2>
+            <p style="font-size: 1.4rem; margin: 10px 0;">
+                <span class="highlight">150 000 FCFA</span> la 1ʳᵉ année
+            </p>
+            <p class="sub">⬇️ Abonnement + Licence inclus. Puis <strong>50 000 FCFA/an</strong> pour continuer à utiliser votre logiciel.</p>
+        </div>
+
+        <!-- Version tableau pour desktop -->
+        <div class="desktop-table-wrapper">
+            <table class="price-table" id="licenceTable">
+                <thead>
+                    <tr><th>Logiciel</th><th>Offre Unique (1ʳᵉ année)</th><th>Renouvellement annuel</th></tr>
+                </thead>
+                <tbody>
+                    <tr data-soft-licence="caisse-simple-licence"><td>Gestion de Caisse Simple</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="caisse-premium-licence"><td>Gestion de Caisse Premium</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="facturation-pro-licence"><td>Facturation & Archivage Pro</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="facturation-simple-licence"><td>Facturation Simple</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="restaurant-licence"><td>Restaurant Complet</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="superette-licence"><td>Superette & Épicerie</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="pharmacie-licence"><td>Pharmacie & Parapharmacie</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="quincaillerie-licence"><td>Quincaillerie & Matériaux</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="ecole-licence"><td>École & Centre de Formation</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="logiciel-immobilier-licence"><td>Logiciel Immobilier</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 12px; text-align: right; font-size: 0.7rem; color: var(--text-muted);">📌 Cliquez sur n'importe quelle ligne pour ouvrir le catalogue détaillé</div>
+        </div>
+
+        <!-- Version mobile : cartes cliquables -->
+        <div class="licence-cards-container" id="mobileLicenceCards"></div>
+
+        <!-- Cartes complémentaires : devis et démo -->
+        <div class="catalog-grid" style="margin-top: 20px;">
+            <div class="catalog-card" data-devis="true">
+                <i class="fas fa-key catalog-icon"></i>
+                <h3>Licence sur mesure</h3>
+                <p>Besoin d'une solution personnalisée ?</p>
+                <button class="badge-catalog devis-wa" data-produit="Licence personnalisée" data-prix="devis">📞 Se renseigner</button>
+            </div>
+            <div class="catalog-card" data-demo="true">
+                <i class="fas fa-chalkboard-user catalog-icon"></i>
+                <h3>Démonstration gratuite</h3>
+                <p>On vous guide vers la meilleure option.</p>
+                <button class="badge-catalog devis-wa" data-produit="Démonstration gratuite" data-prix="gratuit">🎯 Réserver</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <span><i class="fab fa-whatsapp"></i> WhatsApp : <strong>+225 0554101873</strong></span>
+        <span><i class="fas fa-envelope"></i> nstci2025@gmail.com</span>
+        <span><i class="fas fa-phone-alt"></i> +225 05 54 10 18 73</span>
+    </div>
+    <p>© 2026 NOVA Startup Technologie CI — Solutions innovantes</p>
+</footer>
+
+<div id="toastMessage" class="toast-msg"><i class="fab fa-whatsapp"></i> Redirection WhatsApp...</div>
+
+<!-- MODALE UNIQUE pour catalogues Cloud + Licence -->
+<div id="catalogModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-info-circle"></i> <span id="modalTitle">Logiciel</span></h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <!-- Contenu dynamique -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- DONNÉES CATALOGUE CLOUD (OFFRE UNIQUE) ----------
+    const cloudCatalog = {
+        "caisse-simple": {
+            name: "Gestion de Caisse Simple",
+            desc: "Solution idéale pour commerces de proximité, boutiques. Interface intuitive et rapide.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Ventes rapides", "Historique transactions", "Rapports de caisse", "Export Excel", "Support prioritaire"]
+        },
+        "caisse-premium": {
+            name: "Gestion de Caisse Premium",
+            desc: "Multi-caisses, gestion des stocks avancée, dashboard analytics, accès employés.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Multi-caisses", "Contrôle des stocks", "Gestion multi-points", "Tableaux de bord", "Support 24/7"]
+        },
+        "facturation-pro": {
+            name: "Facturation Pro",
+            desc: "Devis, factures, gestion des clients, relances automatiques et génération de rapports.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gabarits factures", "Suivi des impayés", "Devis pro", "Base clients", "Export comptabilité"]
+        },
+        "facturation-simple": {
+            name: "Facturation Simple",
+            desc: "L'essentiel pour facturer rapidement, parfait pour les TPE et auto-entrepreneurs.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Factures simplifiées", "Édition rapide", "Recherche client", "PDF automatique"]
+        },
+        "restaurant": {
+            name: "Restaurant Complet",
+            desc: "Gestion des salles, commandes tables, cuisine, stock nourriture et caisse intégrée.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Plan des tables", "Commandes en cuisine", "Inventaire stock", "Gestion des menus", "Rapports CA"]
+        },
+        "superette": {
+            name: "Superette & Épicerie",
+            desc: "Solution complète pour supermarchés et épiceries. Gestion optimisée des produits périssables et des lots.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gestion dates péremption", "Scan codes-barres", "Ventes par lot", "Inventaire rapide", "Fournisseurs", "Alertes stock"]
+        },
+        "pharmacie": {
+            name: "Pharmacie & Parapharmacie",
+            desc: "Logiciel spécialisé pour officines pharmaceutiques avec traçabilité des médicaments.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gestion des lots et péremptions", "Suivi ordonnances", "Alertes ruptures", "Traçabilité complète", "Conformité pharmaceutique"]
+        },
+        "quincaillerie": {
+            name: "Quincaillerie & Matériaux",
+            desc: "Solution adaptée aux magasins de bricolage, quincaillerie et matériaux de construction.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Unités multiples", "Prix dégressifs", "Devis chantier", "Gestion des fournisseurs", "Stock sécurisé"]
+        },
+        "ecole": {
+            name: "École & Centre de Formation",
+            desc: "Logiciel de gestion complète pour établissements scolaires et centres de formation.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gestion des élèves", "Notes et bulletins", "Paiements des frais", "Emplois du temps", "Certificats", "Communication parents"]
+        },
+        "boulangerie": {
+            name: "Boulangerie & Pâtisserie",
+            desc: "Solution adaptée aux artisans boulangers et pâtissiers.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gestion des recettes", "Suivi production", "Gestion invendus", "Commandes spéciales", "Fidélité client"]
+        },
+        "mode": {
+            name: "Boutique de Mode & Accessoires",
+            desc: "Solution pour boutiques de vêtements, chaussures et accessoires.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gestion des tailles/couleurs", "Collections", "Retours clients", "Campagnes promo", "Stock magasin"]
+        },
+        "logiciel-immobilier": {
+            name: "Logiciel Immobilier Complet",
+            desc: "Solution tout-en-un pour professionnels de l'immobilier. Gestion locative, transactions, syndic, copropriétés, suivi financier et documents juridiques.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: [
+                "Gestion locative : biens, baux, quittances, locataires",
+                "Transactions : mandats, ventes, commissions, prospects",
+                "Syndic : charges, appels de fonds, AG, copropriétaires",
+                "Documents juridiques et contrats",
+                "Suivi financier et comptabilité",
+                "Tableaux de bord et rapports",
+                "Alertes échéances et impayés",
+                "Accès mobile et web"
+            ]
+        },
+    };
+
+    // ---------- DONNÉES CATALOGUE LICENCE (OFFRE UNIQUE) ----------
+    const licenceCatalog = {
+        "caisse-simple-licence": {
+            name: "Gestion de Caisse Simple",
+            desc: "Version licence avec offre unique pour une utilisation optimale.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Support technique inclus", "Mises à jour 1 an", "Formation incluse", "Accès illimité"]
+        },
+        "caisse-premium-licence": {
+            name: "Gestion de Caisse Premium",
+            desc: "Version premium multi-fonctionnalités pour une gestion avancée.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Multi-caisses", "Contrôle des stocks", "Gestion multi-points", "Tableaux de bord", "Support 24/7"]
+        },
+        "facturation-pro-licence": {
+            name: "Facturation Pro",
+            desc: "Logiciel de facturation professionnelle avec offre unique.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Multi-utilisateurs", "Export PDF/Excel", "Suivi client", "Devis illimités"]
+        },
+        "facturation-simple-licence": {
+            name: "Facturation Simple",
+            desc: "Licence pour les besoins essentiels de facturation.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Factures illimitées", "Gestion clients basique", "Export PDF"]
+        },
+        "restaurant-licence": {
+            name: "Restaurant Complet",
+            desc: "Solution complète pour la restauration avec offre unique.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Modules tables", "Inventaire nourriture", "Statistiques", "Commandes en cuisine"]
+        },
+        "superette-licence": {
+            name: "Superette & Épicerie",
+            desc: "Solution licence pour superettes et épiceries.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gestion péremption", "Scan codes-barres", "Multi-caisses", "Alertes stock"]
+        },
+        "pharmacie-licence": {
+            name: "Pharmacie & Parapharmacie",
+            desc: "Solution licence pour pharmacies avec traçabilité.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Traçabilité médicaments", "Suivi ordonnances", "Conformité", "Alertes ruptures"]
+        },
+        "quincaillerie-licence": {
+            name: "Quincaillerie & Matériaux",
+            desc: "Solution licence pour quincailleries.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Unités multiples", "Devis chantier", "Stock sécurisé", "Gestion fournisseurs"]
+        },
+        "ecole-licence": {
+            name: "École & Centre de Formation",
+            desc: "Solution licence pour établissements scolaires.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: ["Gestion des élèves", "Notes", "Paiements", "Emplois du temps", "Certificats"]
+        },
+        "logiciel-immobilier-licence": {
+            name: "Logiciel Immobilier Complet",
+            desc: "Solution professionnelle tout-en-un pour l'immobilier.",
+            offer: {
+                firstYear: "150 000 FCFA",
+                renewal: "50 000 FCFA/an",
+                oldPrice: "200 000 FCFA",
+                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+            },
+            features: [
+                "Gestion locative : biens, baux, quittances, locataires",
+                "Transactions : mandats, ventes, commissions, prospects",
+                "Syndic : charges, appels de fonds, AG, copropriétaires",
+                "Documents juridiques et contrats",
+                "Suivi financier et comptabilité",
+                "Tableaux de bord et rapports",
+                "Alertes échéances et impayés",
+                "Accès mobile et web"
+            ]
+        },
+    };
+
+    // ----- GESTION MODALE UNIVERSELLE -----
+    const modal = document.getElementById('catalogModal');
+    const modalTitleSpan = document.getElementById('modalTitle');
+    const modalBodyDiv = document.getElementById('modalBody');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    function openModalForCloud(softKey) {
+        const data = cloudCatalog[softKey];
+        if (!data) return;
+        modalTitleSpan.innerHTML = `<i class="fas fa-cloud-upload-alt"></i> ${data.name} (Cloud)`;
+        let html = `<p style="margin-bottom: 20px;">${data.desc}</p>`;
+        html += `<div class="offre-detail"><h4><i class="fas fa-gem"></i> Offre Unique</h4>`;
+        
+        // Bannière PROMO
+        html += `<div class="promo-badge" style="margin-bottom: 12px;">
+                    <i class="fas fa-tag"></i> PROMO VALABLE ! 
+                    <span class="old-price">${data.offer.oldPrice}</span> 
+                    → <strong class="promo-price">${data.offer.firstYear}</strong>
+                </div>`;
+        
+        html += `<div class="price-row"><span>🎯 1ʳᵉ année (abonnement + licence)</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.firstYear}</strong></div>`;
+        html += `<div class="price-row"><span>🔄 Renouvellement annuel</span><strong>${data.offer.renewal}</strong></div>`;
+        html += `<div style="margin-top:12px; padding:10px; background: var(--promo-bg); border-radius: 12px; font-size:0.9rem; border-left: 3px solid var(--promo-border);">${data.offer.desc}</div>`;
+        html += `</div><div class="offre-detail"><h4><i class="fas fa-list-check"></i> Fonctionnalités</h4><ul style="margin-left: 20px;">`;
+        data.features.forEach(f => { html += `<li style="margin: 8px 0;"><i class="fas fa-check-circle" style="color: var(--success);"></i> ${f}</li>`; });
+        html += `</ul></div><button class="btn-modal-wa" data-produit="${data.name} (Cloud - Offre Unique)" data-prix="150 000 FCFA"><i class="fab fa-whatsapp"></i> Contacter pour ce logiciel</button>`;
+        modalBodyDiv.innerHTML = html;
+        modal.style.display = 'flex';
+        attachModalWaButton();
+    }
+
+    function openModalForLicence(licenceKey) {
+        const data = licenceCatalog[licenceKey];
+        if (!data) return;
+        modalTitleSpan.innerHTML = `<i class="fas fa-laptop-code"></i> ${data.name} (Licence)`;
+        let html = `<p style="margin-bottom: 20px;">${data.desc}</p>`;
+        html += `<div class="offre-detail"><h4><i class="fas fa-gem"></i> Offre Unique</h4>`;
+        
+        // Bannière PROMO
+        html += `<div class="promo-badge" style="margin-bottom: 12px;">
+                    <i class="fas fa-tag"></i> PROMO VALABLE ! 
+                    <span class="old-price">${data.offer.oldPrice}</span> 
+                    → <strong class="promo-price">${data.offer.firstYear}</strong>
+                </div>`;
+        
+        html += `<div class="price-row"><span>🎯 1ʳᵉ année (abonnement + licence)</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.firstYear}</strong></div>`;
+        html += `<div class="price-row"><span>🔄 Renouvellement annuel</span><strong>${data.offer.renewal}</strong></div>`;
+        html += `<div style="margin-top:12px; padding:10px; background: var(--promo-bg); border-radius: 12px; font-size:0.9rem; border-left: 3px solid var(--promo-border);">${data.offer.desc}</div>`;
+        html += `</div><div class="offre-detail"><h4><i class="fas fa-cogs"></i> Fonctionnalités incluses</h4><ul style="margin-left: 20px;">`;
+        data.features.forEach(f => { html += `<li style="margin: 8px 0;"><i class="fas fa-check-circle" style="color: var(--success);"></i> ${f}</li>`; });
+        html += `</ul></div><button class="btn-modal-wa" data-produit="${data.name} (Licence - Offre Unique)" data-prix="150 000 FCFA"><i class="fab fa-whatsapp"></i> Demander un devis</button>`;
+        modalBodyDiv.innerHTML = html;
+        modal.style.display = 'flex';
+        attachModalWaButton();
+    }
+
+    function attachModalWaButton() {
+        const waBtn = modalBodyDiv.querySelector('.btn-modal-wa');
+        if (waBtn) {
+            waBtn.addEventListener('click', (e) => {
+                const produit = waBtn.getAttribute('data-produit') || "Solution NOVA";
+                showToastAndRedirect(produit, "catalogue");
+                modal.style.display = 'none';
+            });
+        }
+    }
+
+    // Fermeture modale
+    closeModalBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    // ---------- ÉVÉNEMENTS : cartes cloud ----------
+    document.querySelectorAll('.catalog-card[data-type="cloud"]').forEach(card => {
+        card.addEventListener('click', (e) => {
+            if(e.target.classList.contains('devis-wa')) return;
+            const soft = card.getAttribute('data-soft');
+            if (soft && cloudCatalog[soft]) openModalForCloud(soft);
+        });
+    });
+
+    // ---------- ÉVÉNEMENTS : tableau licence (desktop) ----------
+    const licenceRows = document.querySelectorAll('#licenceTable tbody tr');
+    licenceRows.forEach(row => {
+        row.addEventListener('click', () => {
+            const licenceKey = row.getAttribute('data-soft-licence');
+            if (licenceKey && licenceCatalog[licenceKey]) openModalForLicence(licenceKey);
+        });
+    });
+
+    // ---------- GÉNÉRATION CARTES MOBILES LICENCE ----------
+    const licenceDataArray = [
+        { key: "caisse-simple-licence", name: "Gestion de Caisse Simple" },
+        { key: "caisse-premium-licence", name: "Gestion de Caisse Premium" },
+        { key: "facturation-pro-licence", name: "Facturation Pro" },
+        { key: "facturation-simple-licence", name: "Facturation Simple" },
+        { key: "restaurant-licence", name: "Restaurant Complet" },
+        { key: "superette-licence", name: "Superette & Épicerie" },
+        { key: "pharmacie-licence", name: "Pharmacie & Parapharmacie" },
+        { key: "quincaillerie-licence", name: "Quincaillerie & Matériaux" },
+        { key: "ecole-licence", name: "École & Centre de Formation" },
+        { key: "logiciel-immobilier-licence", name: "Logiciel Immobilier" }
+    ];
+    const mobileContainer = document.getElementById('mobileLicenceCards');
+    if (mobileContainer) {
+        mobileContainer.innerHTML = '';
+        licenceDataArray.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'licence-card';
+            card.setAttribute('data-licence-key', item.key);
+            card.innerHTML = `
+                <h4><i class="fas fa-cube"></i> ${item.name}</h4>
+                <div style="display:flex; flex-direction:column; gap:8px; margin-top: 8px;">
+                    <div style="display:flex; justify-content:space-between; background: var(--success-light); padding: 8px 12px; border-radius: 8px;">
+                        <span>🎯 1ʳᵉ année</span>
+                        <strong style="color: var(--success);">150 000 FCFA</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; padding: 8px 12px;">
+                        <span>🔄 Renouvellement</span>
+                        <strong>50 000 FCFA/an</strong>
+                    </div>
+                </div>
+                <div style="font-size:0.75rem; color: var(--text-muted); margin-top: 8px;">⬇️ Abonnement + licence inclus la 1ʳᵉ année</div>
+                <span style="display:inline-block; margin-top:12px; font-size:0.7rem; color:var(--accent-gold);"><i class="fas fa-mouse-pointer"></i> Cliquez pour détails</span>
+            `;
+            card.addEventListener('click', () => {
+                if (licenceCatalog[item.key]) openModalForLicence(item.key);
+            });
+            mobileContainer.appendChild(card);
+        });
+    }
+
+    // WhatsApp global
+    const whatsappNumber = "+2250554101873";
+    function showToastAndRedirect(produit, prixInfo) {
+        let message = `Bonjour NOVA Startup, je suis intéressé par : ${produit}. Souhaitez-vous me donner plus d'informations ?`;
+        const encoded = encodeURIComponent(message);
+        const waLink = `https://wa.me/${whatsappNumber}?text=${encoded}`;
+        const toast = document.getElementById('toastMessage');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 1700);
+        setTimeout(() => window.open(waLink, '_blank'), 400);
+    }
+
+    // Boutons devis existants
+    function attachDevisEvents() {
+        document.querySelectorAll('.devis-wa').forEach(btn => {
+            btn.removeEventListener('click', devisHandler);
+            btn.addEventListener('click', devisHandler);
+        });
+    }
+    function devisHandler(e) {
+        e.stopPropagation();
+        const prod = this.getAttribute('data-produit') || "devis NOVA";
+        showToastAndRedirect(prod, "devis");
+    }
+    attachDevisEvents();
+
+    // Gestion onglets
+    const btns = document.querySelectorAll('.tab-btn');
+    const catalogDiv = document.getElementById('catalog');
+    const licenceDiv = document.getElementById('licence');
+    function setActiveTab(tabId) {
+        if (tabId === 'catalog') {
+            catalogDiv.classList.add('active-tab');
+            licenceDiv.classList.remove('active-tab');
+        } else {
+            licenceDiv.classList.add('active-tab');
+            catalogDiv.classList.remove('active-tab');
+        }
+        btns.forEach(btn => {
+            if (btn.getAttribute('data-tab') === tabId) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+    }
+    btns.forEach(btn => btn.addEventListener('click', (e) => setActiveTab(btn.getAttribute('data-tab'))));
+    setActiveTab('catalog');
+</script>
+</body>
+</html>
