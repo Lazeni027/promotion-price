@@ -21,25 +21,25 @@
 
         /* Palette professionnelle avec couleurs promo mises en avant */
         :root {
-            --primary-dark: #0a2540;
-            --primary: #1a4d7a;
+            --primary-dark: #4853c7;
+            --primary: #696e7ddb;
             --primary-light: #2c6e9e;
-            --accent-gold: #c7a03a;
-            --accent-gold-light: #e0bb5e;
+            --accent-gold: #ffc83d;
+            --accent-gold-light: #f8c74d;
             --success: #147042;
             --success-light: #e6f4ee;
             --promo-bg: #ffecd6;
             --promo-border: #e67e22;
             --promo-text: #e67e22;
-            --promo-highlight: #d35400;
+            --promo-highlight: #ff7316;
             --gray-bg: #f8fafc;
             --gray-border: #e2e8f0;
-            --text-dark: #1a2c3e;
+            --text-dark: #1d4266;
             --text-muted: #4a5b6e;
             --card-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
             --pharmacy: #2ecc71;
             --superette: #3498db;
-            --hardware: #e67e22;
+            --hardware: #fa8824;
             --school: #9b59b6;
         }
 
@@ -498,6 +498,17 @@
             opacity: 0.9;
             font-size: 1rem;
         }
+
+        /* Style pour le prix mensuel */
+        .price-mensuel {
+            background: #e8f0fe;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            display: inline-block;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -631,30 +642,30 @@
         
         <!-- Bannière Nouvelle Offre -->
         <div class="new-offer-banner">
-            <h2>🚀 Nouvelle Offre Unique</h2>
+            <h2>🚀 Offre Unique</h2>
             <p style="font-size: 1.4rem; margin: 10px 0;">
-                <span class="highlight">150 000 FCFA</span> la 1ʳᵉ année
+                <span class="highlight">5 000 FCFA/mois</span> ou <span class="highlight">50 000 FCFA/an</span>
             </p>
-            <p class="sub">⬇️ Abonnement + Licence inclus.  <br> Et <strong>50 000 FCFA/an</strong> pour continuer à utiliser votre logiciel.</p>
+            <p class="sub">⬇️ Abonnement + Licence inclus.  <br> <strong>Économisez 10 000 FCFA</strong> avec l'offre annuelle !</p>
         </div>
 
         <!-- Version tableau pour desktop -->
         <div class="desktop-table-wrapper">
             <table class="price-table" id="licenceTable">
                 <thead>
-                    <tr><th>Logiciel</th><th>Offre Unique (1ʳᵉ année)</th><th>Renouvellement annuel</th></tr>
+                    <tr><th>Logiciel</th><th>Mensuel</th><th>Annuel (Économie)</th></tr>
                 </thead>
                 <tbody>
-                    <tr data-soft-licence="caisse-simple-licence"><td>Gestion de Caisse Simple</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="caisse-premium-licence"><td>Gestion de Caisse Premium</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="facturation-pro-licence"><td>Facturation & Archivage Pro</td><td><strong>100 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="facturation-simple-licence"><td>Facturation Simple</td><td><strong>50 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="restaurant-licence"><td>Restaurant </td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="superette-licence"><td>Superette & Épicerie</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="pharmacie-licence"><td>Pharmacie & Parapharmacie</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="quincaillerie-licence"><td>Quincaillerie & Matériaux</td><td><strong>150 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="ecole-licence"><td>École Pro+ & Centre de Formation</td><td><strong>200 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
-                    <tr data-soft-licence="logiciel-immobilier-licence"><td>Logiciel Immobilier</td><td><strong>350 000 FCFA</strong></td><td>50 000 FCFA/an</td></tr>
+                    <tr data-soft-licence="caisse-simple-licence"><td>Gestion de Caisse Simple</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="caisse-premium-licence"><td>Gestion de Caisse Premium</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="facturation-pro-licence"><td>Facturation & Archivage Pro</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="facturation-simple-licence"><td>Facturation Simple</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="restaurant-licence"><td>Restaurant </td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="superette-licence"><td>Superette & Épicerie</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="pharmacie-licence"><td>Pharmacie & Parapharmacie</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="quincaillerie-licence"><td>Quincaillerie & Matériaux</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="ecole-licence"><td>École Pro+ & Centre de Formation</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
+                    <tr data-soft-licence="logiciel-immobilier-licence"><td>Logiciel Immobilier</td><td><strong>5 000 FCFA/mois</strong></td><td><strong>50 000 FCFA/an</strong> <span style="color:var(--success);font-size:0.8rem;">(-10 000 FCFA)</span></td></tr>
                 </tbody>
             </table>
             <div style="margin-top: 12px; text-align: right; font-size: 0.7rem; color: var(--text-muted);">📌 Cliquez sur n'importe quelle ligne pour ouvrir le catalogue détaillé</div>
@@ -706,16 +717,17 @@
 </div>
 
 <script>
-    // ---------- DONNÉES CATALOGUE CLOUD (OFFRE UNIQUE) ----------
+    // ---------- DONNÉES CATALOGUE CLOUD ----------
     const cloudCatalog = {
         "caisse-simple": {
             name: "Gestion de Caisse Simple",
             desc: "Solution idéale pour commerces de proximité, boutiques. Interface intuitive et rapide.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Ventes rapides", "Historique transactions", "Rapports de caisse", "Export Excel", "Support prioritaire"]
         },
@@ -723,10 +735,11 @@
             name: "Gestion de Caisse Premium",
             desc: "Multi-caisses, gestion des stocks avancée, dashboard analytics, accès employés.",
             offer: {
-                firstYear: "200 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Multi-caisses", "Contrôle des stocks", "Gestion multi-points", "Tableaux de bord", "Support 24/7"]
         },
@@ -734,10 +747,11 @@
             name: "Facturation Pro",
             desc: "Devis, factures, gestion des clients, relances automatiques et génération de rapports.",
             offer: {
-                firstYear: "100 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "150 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gabarits factures", "Suivi des impayés", "Devis pro", "Base clients", "Export comptabilité"]
         },
@@ -745,10 +759,11 @@
             name: "Facturation Simple",
             desc: "L'essentiel pour facturer rapidement, parfait pour les TPE et auto-entrepreneurs.",
             offer: {
-                firstYear: "50 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "100 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Factures simplifiées", "Édition rapide", "Recherche client", "PDF automatique"]
         },
@@ -756,10 +771,11 @@
             name: "Restaurant Complet",
             desc: "Gestion des salles, commandes tables, cuisine, stock nourriture et caisse intégrée.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Plan des tables", "Commandes en cuisine", "Inventaire stock", "Gestion des menus", "Rapports CA"]
         },
@@ -767,10 +783,11 @@
             name: "Superette & Épicerie",
             desc: "Solution complète pour supermarchés et épiceries. Gestion optimisée des produits périssables et des lots.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gestion dates péremption", "Scan codes-barres", "Ventes par lot", "Inventaire rapide", "Fournisseurs", "Alertes stock"]
         },
@@ -778,10 +795,11 @@
             name: "Pharmacie & Parapharmacie",
             desc: "Logiciel spécialisé pour officines pharmaceutiques avec traçabilité des médicaments.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gestion des lots et péremptions", "Suivi ordonnances", "Alertes ruptures", "Traçabilité complète", "Conformité pharmaceutique"]
         },
@@ -789,10 +807,11 @@
             name: "Quincaillerie & Matériaux",
             desc: "Solution adaptée aux magasins de bricolage, quincaillerie et matériaux de construction.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Unités multiples", "Prix dégressifs", "Devis chantier", "Gestion des fournisseurs", "Stock sécurisé"]
         },
@@ -800,10 +819,11 @@
             name: "École Pro+ & Centre de Formation",
             desc: "Logiciel de gestion complète pour établissements scolaires et centres de formation.",
             offer: {
-                firstYear: "200 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "250 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gestion des élèves", "Notes et bulletins", "Paiements des frais", "Emplois du temps", "Certificats", "Communication parents"]
         },
@@ -811,10 +831,11 @@
             name: "Boulangerie & Pâtisserie",
             desc: "Solution adaptée aux artisans boulangers et pâtissiers.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gestion des recettes", "Suivi production", "Gestion invendus", "Commandes spéciales", "Fidélité client"]
         },
@@ -822,10 +843,11 @@
             name: "Boutique de Mode & Accessoires",
             desc: "Solution pour boutiques de vêtements, chaussures et accessoires.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gestion des tailles/couleurs", "Collections", "Retours clients", "Campagnes promo", "Stock magasin"]
         },
@@ -833,10 +855,11 @@
             name: "Logiciel Immobilier Complet",
             desc: "Solution tout-en-un pour professionnels de l'immobilier. Gestion locative, transactions, syndic, copropriétés, suivi financier et documents juridiques.",
             offer: {
-                firstYear: "350 000 FCFA",
-                renewal: "100 000 FCFA/an",
-                oldPrice: "500 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Et 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: [
                 "Gestion locative : biens, baux, quittances, locataires",
@@ -851,16 +874,17 @@
         },
     };
 
-    // ---------- DONNÉES CATALOGUE LICENCE (OFFRE UNIQUE) ----------
+    // ---------- DONNÉES CATALOGUE LICENCE ----------
     const licenceCatalog = {
         "caisse-simple-licence": {
             name: "Gestion de Caisse Simple",
             desc: "Version licence avec offre unique pour une utilisation optimale.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Support technique inclus", "Mises à jour 1 an", "Formation incluse", "Accès illimité"]
         },
@@ -868,10 +892,11 @@
             name: "Gestion de Caisse Premium",
             desc: "Version premium multi-fonctionnalités pour une gestion avancée.",
             offer: {
-                firstYear: "200 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Multi-caisses", "Contrôle des stocks", "Gestion multi-points", "Tableaux de bord", "Support 24/7"]
         },
@@ -879,10 +904,11 @@
             name: "Facturation Pro",
             desc: "Logiciel de facturation professionnelle avec offre unique.",
             offer: {
-                firstYear: "100 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "150 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Multi-utilisateurs", "Export PDF/Excel", "Suivi client", "Devis illimités"]
         },
@@ -890,10 +916,11 @@
             name: "Facturation Simple",
             desc: "Licence pour les besoins essentiels de facturation.",
             offer: {
-                firstYear: "50 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Factures illimitées", "Gestion clients basique", "Export PDF"]
         },
@@ -901,10 +928,11 @@
             name: "Restaurant Complet",
             desc: "Solution complète pour la restauration avec offre unique.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Modules tables", "Inventaire nourriture", "Statistiques", "Commandes en cuisine"]
         },
@@ -912,10 +940,11 @@
             name: "Superette & Épicerie",
             desc: "Solution licence pour superettes et épiceries.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gestion péremption", "Scan codes-barres", "Multi-caisses", "Alertes stock"]
         },
@@ -923,10 +952,11 @@
             name: "Pharmacie & Parapharmacie",
             desc: "Solution licence pour pharmacies avec traçabilité.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Traçabilité médicaments", "Suivi ordonnances", "Conformité", "Alertes ruptures"]
         },
@@ -934,10 +964,11 @@
             name: "Quincaillerie & Matériaux",
             desc: "Solution licence pour quincailleries.",
             offer: {
-                firstYear: "150 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Unités multiples", "Devis chantier", "Stock sécurisé", "Gestion fournisseurs"]
         },
@@ -945,10 +976,11 @@
             name: "École Pro+ & Centre de Formation",
             desc: "Solution licence pour établissements scolaires.",
             offer: {
-                firstYear: "200 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 50 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: ["Gestion des élèves", "Notes", "Paiements", "Emplois du temps", "Certificats"]
         },
@@ -956,10 +988,11 @@
             name: "Logiciel Immobilier",
             desc: "Solution professionnelle tout-en-un pour l'immobilier.",
             offer: {
-                firstYear: "350 000 FCFA",
-                renewal: "50 000 FCFA/an",
-                oldPrice: "200 000 FCFA",
-                desc: "1ʳᵉ année : abonnement + licence inclus. Puis 100 000 FCFA chaque année pour continuer à utiliser le logiciel."
+                monthly: "5 000 FCFA/mois",
+                yearly: "50 000 FCFA/an",
+                oldPriceMonthly: "6 000 FCFA/mois",
+                oldPriceYearly: "60 000 FCFA/an",
+                desc: "Abonnement + licence inclus. Économisez 10 000 FCFA avec l'offre annuelle."
             },
             features: [
                 "Gestion locative : biens, baux, quittances, locataires",
@@ -990,16 +1023,18 @@
         // Bannière PROMO
         html += `<div class="promo-badge" style="margin-bottom: 12px;">
                     <i class="fas fa-tag"></i> PROMO VALABLE ! 
-                    <span class="old-price">${data.offer.oldPrice}</span> 
-                    → <strong class="promo-price">${data.offer.firstYear}</strong>
+                    <span class="old-price">${data.offer.oldPriceMonthly}</span> 
+                    → <strong class="promo-price">${data.offer.monthly}</strong>
+                    <br><span class="old-price">${data.offer.oldPriceYearly}</span> 
+                    → <strong class="promo-price">${data.offer.yearly}</strong>
                 </div>`;
         
-        html += `<div class="price-row"><span> 1ʳᵉ année (abonnement + licence)</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.firstYear}</strong></div>`;
-        html += `<div class="price-row"><span> Renouvellement annuel</span><strong>${data.offer.renewal}</strong></div>`;
+        html += `<div class="price-row"><span> Mensuel</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.monthly}</strong></div>`;
+        html += `<div class="price-row"><span> Annuel (économie 10 000 FCFA)</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.yearly}</strong></div>`;
         html += `<div style="margin-top:12px; padding:10px; background: var(--promo-bg); border-radius: 12px; font-size:0.9rem; border-left: 3px solid var(--promo-border);">${data.offer.desc}</div>`;
         html += `</div><div class="offre-detail"><h4><i class="fas fa-list-check"></i> Fonctionnalités</h4><ul style="margin-left: 20px;">`;
         data.features.forEach(f => { html += `<li style="margin: 8px 0;"><i class="fas fa-check-circle" style="color: var(--success);"></i> ${f}</li>`; });
-        html += `</ul></div><button class="btn-modal-wa" data-produit="${data.name} (Cloud - Offre Unique)" data-prix="150 000 FCFA"><i class="fab fa-whatsapp"></i> Contacter pour ce logiciel</button>`;
+        html += `</ul></div><button class="btn-modal-wa" data-produit="${data.name} (Cloud)" data-prix="5 000 FCFA/mois"><i class="fab fa-whatsapp"></i> Contacter pour ce logiciel</button>`;
         modalBodyDiv.innerHTML = html;
         modal.style.display = 'flex';
         attachModalWaButton();
@@ -1015,16 +1050,18 @@
         // Bannière PROMO
         html += `<div class="promo-badge" style="margin-bottom: 12px;">
                     <i class="fas fa-tag"></i> PROMO VALABLE ! 
-                    <span class="old-price">${data.offer.oldPrice}</span> 
-                    → <strong class="promo-price">${data.offer.firstYear}</strong>
+                    <span class="old-price">${data.offer.oldPriceMonthly}</span> 
+                    → <strong class="promo-price">${data.offer.monthly}</strong>
+                    <br><span class="old-price">${data.offer.oldPriceYearly}</span> 
+                    → <strong class="promo-price">${data.offer.yearly}</strong>
                 </div>`;
         
-        html += `<div class="price-row"><span> 1ʳᵉ année (abonnement + licence)</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.firstYear}</strong></div>`;
-        html += `<div class="price-row"><span> Renouvellement annuel</span><strong>${data.offer.renewal}</strong></div>`;
+        html += `<div class="price-row"><span> Mensuel</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.monthly}</strong></div>`;
+        html += `<div class="price-row"><span> Annuel (économie 10 000 FCFA)</span><strong class="price-highlight" style="font-size:1.2rem;">${data.offer.yearly}</strong></div>`;
         html += `<div style="margin-top:12px; padding:10px; background: var(--promo-bg); border-radius: 12px; font-size:0.9rem; border-left: 3px solid var(--promo-border);">${data.offer.desc}</div>`;
         html += `</div><div class="offre-detail"><h4><i class="fas fa-cogs"></i> Fonctionnalités incluses</h4><ul style="margin-left: 20px;">`;
         data.features.forEach(f => { html += `<li style="margin: 8px 0;"><i class="fas fa-check-circle" style="color: var(--success);"></i> ${f}</li>`; });
-        html += `</ul></div><button class="btn-modal-wa" data-produit="${data.name} (Licence - Offre Unique)" data-prix="150 000 FCFA"><i class="fab fa-whatsapp"></i> Demander un devis</button>`;
+        html += `</ul></div><button class="btn-modal-wa" data-produit="${data.name} (Licence)" data-prix="5 000 FCFA/mois"><i class="fab fa-whatsapp"></i> Demander un devis</button>`;
         modalBodyDiv.innerHTML = html;
         modal.style.display = 'flex';
         attachModalWaButton();
@@ -1087,15 +1124,16 @@
                 <h4><i class="fas fa-cube"></i> ${item.name}</h4>
                 <div style="display:flex; flex-direction:column; gap:8px; margin-top: 8px;">
                     <div style="display:flex; justify-content:space-between; background: var(--success-light); padding: 8px 12px; border-radius: 8px;">
-                        <span>1ʳᵉ année</span>
-                        <strong style="color: var(--success);">150 000 FCFA</strong>
+                        <span>Mensuel</span>
+                        <strong style="color: var(--success);">5 000 FCFA/mois</strong>
                     </div>
-                    <div style="display:flex; justify-content:space-between; padding: 8px 12px;">
-                        <span>Renouvellement</span>
-                        <strong>50 000 FCFA/an</strong>
+                    <div style="display:flex; justify-content:space-between; padding: 8px 12px; background: #e8f0fe; border-radius: 8px;">
+                        <span>Annuel</span>
+                        <strong style="color: var(--primary);">50 000 FCFA/an</strong>
                     </div>
+                    <div style="font-size:0.75rem; color: var(--success); text-align:center;">Économisez 10 000 FCFA !</div>
                 </div>
-                <div style="font-size:0.75rem; color: var(--text-muted); margin-top: 8px;">⬇️ Abonnement + licence inclus la 1ʳᵉ année</div>
+                <div style="font-size:0.75rem; color: var(--text-muted); margin-top: 8px;">⬇️ Abonnement + licence inclus</div>
                 <span style="display:inline-block; margin-top:12px; font-size:0.7rem; color:var(--accent-gold);"><i class="fas fa-mouse-pointer"></i> Cliquez pour détails</span>
             `;
             card.addEventListener('click', () => {
